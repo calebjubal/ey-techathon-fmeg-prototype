@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from typing import List
+import os
 
 from models.main_agent import (
 	CandidateProduct,
@@ -71,7 +72,7 @@ def _fallback_recommend(scope: List[ScopeItem]) -> TechnicalRecommendResponse:
 def recommend_oem_products(req: TechnicalRecommendRequest) -> TechnicalRecommendResponse:
 	ollama = _try_import_ollama()
 	if ollama:
-		model = "llama3.1"
+		model = os.getenv("OLLAMA_MODEL", "llama3.1")
 		system = (
 			"You are a technical matching assistant. Given scope items and their specs, "
 			"recommend the top 3 OEM products per item with a 0-1 match_score. "

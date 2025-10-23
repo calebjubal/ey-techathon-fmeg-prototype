@@ -4,6 +4,7 @@ import json
 from datetime import date, timedelta
 from typing import List
 
+import os
 from models.main_agent import RFPRecord, SalesIdentifyRequest, SalesIdentifyResponse
 
 
@@ -58,7 +59,7 @@ def identify_rfps(req: SalesIdentifyRequest) -> SalesIdentifyResponse:
 	ollama = _try_import_ollama()
 
 	if ollama:
-		model = "llama3.1"  # Adjust to your local model name if different
+		model = os.getenv("OLLAMA_MODEL", "llama3.1")  # Adjust via env var if needed
 		system = (
 			"You are a helpful assistant that extracts RFP details from links or references "
 			"and returns strict JSON. Always include a succinct summary if possible."

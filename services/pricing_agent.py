@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from typing import Dict, List
+import os
 
 from models.main_agent import (
 	PricedItem,
@@ -59,7 +60,7 @@ def _fallback_price(recommendations: List[Recommendation], tests: List[str]) -> 
 def price_recommendations(req: PricingRequest) -> PricingResponse:
 	ollama = _try_import_ollama()
 	if ollama and req.recommendations:
-		model = "llama3.1"
+		model = os.getenv("OLLAMA_MODEL", "llama3.1")
 		system = (
 			"You are a pricing assistant. Given candidate products and tests/services, "
 			"estimate unit prices and service prices. This is a dummy pricing; keep values realistic. "

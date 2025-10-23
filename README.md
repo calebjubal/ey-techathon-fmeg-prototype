@@ -64,6 +64,95 @@ The primary goal is to reduce manual effort in responding to complex RFPs by div
 
 ---
 
+## 🚀 Run the API locally
+
+The app uses FastAPI. You can run it with the built-in FastAPI server (included in `fastapi[standard]`).
+
+```powershell
+# From the project root
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Interactive docs will be available at:
+- http://localhost:8000/docs
+- http://localhost:8000/redoc
+
+Optional: set a different Ollama model name via environment variable before running:
+
+```powershell
+$env:OLLAMA_MODEL = "llama3.1"; uvicorn main:app --reload
+```
+
+Ensure you have Ollama running locally with the model you configured.
+
+---
+
+## 📡 API quickstart
+
+Example payloads for key endpoints:
+
+1) Identify RFPs (Sales)
+
+POST /sales/identify
+
+```json
+{
+  "sources": ["https://example.com/rfp-123"],
+  "due_within_days": 3
+}
+```
+
+2) Recommend OEM SKUs (Technical)
+
+POST /technical/recommend
+
+```json
+{
+  "rfp": {"id": "rfp-123", "title": "Sample RFP"},
+  "scope": [
+    {
+      "item_id": "itm-1",
+      "description": "Medium voltage control panel",
+      "specs": [{"name": "Voltage", "value": "11kV"}]
+    }
+  ]
+}
+```
+
+3) Price recommendations (Pricing)
+
+POST /pricing/price
+
+```json
+{
+  "recommendations": [
+    {
+      "scope_item_id": "itm-1",
+      "candidates": [{"sku": "OEMX-CTRL-11KV-A", "oem": "OEMX", "match_score": 0.86}]
+    }
+  ],
+  "tests": ["Factory Acceptance Test"]
+}
+```
+
+4) Full orchestration (Main)
+
+POST /main/orchestrate
+
+```json
+{
+  "sources": ["https://example.com/rfp-123"],
+  "scope": [
+    {"item_id": "itm-1", "description": "MV Panel", "specs": []}
+  ],
+  "tests": ["FAT"]
+}
+```
+
+All endpoints will return structured JSON responses using Pydantic models.
+
+---
+
 ## 🧭 Contributor Guide
 
 Follow these steps if you want to contribute to this repository using the correct Git workflow.
