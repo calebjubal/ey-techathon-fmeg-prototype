@@ -328,52 +328,50 @@ For questions or suggestions, please open an **Issue** or start a **Discussion**
 
 ⭐ If you found this project useful, don’t forget to **star the repo**!
 
-
-Here are **two Mermaid loop diagrams** (integrated with the Agora Conversational AI Engine structure you showed):
+Here are **compact left-to-right (LR) Mermaid diagrams** for your two conversational-AI flows:
 
 ---
 
-### 🌀 Cycle 1 – Elderly Medicine Reminder Flow
+### Cycle 1 – Medicine Reminder Flow
 
 ```mermaid
-flowchart TD
-    A[User Voice Input] -->|Voice| B[Agora Conversational AI Engine]
-    B --> C[ASR: Speech to Text]
-    C --> D[LLM: Understand Context & Schedule]
-    D --> E{Is it medicine time?}
-    E -->|Yes| F[AI: Generate Reminder Response]
-    F --> G[TTS: Convert to Speech]
-    G --> H[User hears instruction via Agora Voice]
-    E -->|No| I[AI: Wait until next scheduled time]
-    H --> J{User confirms taken?}
-    J -->|Yes| K[Log completion & Thank user]
-    J -->|No| L[AI repeats guidance or notifies caregiver]
-    K --> M[Cycle Complete]
-    L --> M
+flowchart LR
+    A[Retrieve User Profile & Schedule] --> B[Start Agora Voice Session]
+    B --> C[ASR → Text]
+    C --> D[LLM: Is it time for medication?]
+    D -- Yes --> E[Generate Reminder + Instructions]
+    D -- No --> F[“Not time yet, next at …”]
+    E --> G[TTS → Speak to User]
+    G --> H{User confirms taken?}
+    H -- Yes --> I[Log taken & Thank User]
+    H -- No --> J[Repeat guidance / Escalate]
+    I --> K[End Session]
+    J --> K
+    F --> K
 ```
 
 ---
 
-### 🩺 Cycle 2 – Patient Slot Booking Flow
+### Cycle 2 – Patient Slot Booking Flow
 
 ```mermaid
-flowchart TD
-    A[Patient speaks request] -->|Voice| B[Agora Conversational AI Engine]
-    B --> C[ASR: Convert to Text]
-    C --> D[LLM: Understand intent 'Book Appointment']
-    D --> E[Fetch Patient History + Preferences]
-    E --> F[Check KB for Doctor Availability]
-    F --> G{Slots Available?}
-    G -->|Yes| H[AI lists available slots]
-    H --> I[Patient selects preferred slot]
-    I --> J[Confirm Booking + TTS Response]
-    J --> K[Send Reminder + Log Data]
-    G -->|No| L[Offer Alternate Doctor/Time]
-    L --> F
-    K --> M[Cycle Complete]
+flowchart LR
+    A[Authenticate Patient] --> B[Fetch History & Preferences]
+    B --> C[Start Agora Voice Session]
+    C --> D[ASR → Text]
+    D --> E[LLM: “I’d like to book an appointment”]
+    E --> F[Check Available Slots]
+    F -- Available --> G[Offer Slot Options]
+    G --> H[Patient Selects Slot]
+    H --> I[Confirm Booking + TTS Response]
+    I --> J[Schedule Reminder & Log Booking]
+    F -- None --> K[Offer Alternate Doctor/Time]
+    K --> F
+    J --> L[End Session]
 ```
 
 ---
 
-Would you like me to extend these with **Agora module labels** (e.g., ASR, LLM, TTS, Network Routing, etc.) to match the architecture shown in your image?
+If you like, I can **merge both flows into one diagram**, include more detail (e.g., incorporating your shown architecture with ASR / LLM / TTS boxes and the Agora modules) and provide a downloadable image or PDF. Would you like that?
+
 
