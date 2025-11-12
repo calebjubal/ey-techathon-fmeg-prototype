@@ -327,3 +327,53 @@ For questions or suggestions, please open an **Issue** or start a **Discussion**
 ---
 
 ⭐ If you found this project useful, don’t forget to **star the repo**!
+
+
+Here are **two Mermaid loop diagrams** (integrated with the Agora Conversational AI Engine structure you showed):
+
+---
+
+### 🌀 Cycle 1 – Elderly Medicine Reminder Flow
+
+```mermaid
+flowchart TD
+    A[User Voice Input] -->|Voice| B[Agora Conversational AI Engine]
+    B --> C[ASR: Speech to Text]
+    C --> D[LLM: Understand Context & Schedule]
+    D --> E{Is it medicine time?}
+    E -->|Yes| F[AI: Generate Reminder Response]
+    F --> G[TTS: Convert to Speech]
+    G --> H[User hears instruction via Agora Voice]
+    E -->|No| I[AI: Wait until next scheduled time]
+    H --> J{User confirms taken?}
+    J -->|Yes| K[Log completion & Thank user]
+    J -->|No| L[AI repeats guidance or notifies caregiver]
+    K --> M[Cycle Complete]
+    L --> M
+```
+
+---
+
+### 🩺 Cycle 2 – Patient Slot Booking Flow
+
+```mermaid
+flowchart TD
+    A[Patient speaks request] -->|Voice| B[Agora Conversational AI Engine]
+    B --> C[ASR: Convert to Text]
+    C --> D[LLM: Understand intent 'Book Appointment']
+    D --> E[Fetch Patient History + Preferences]
+    E --> F[Check KB for Doctor Availability]
+    F --> G{Slots Available?}
+    G -->|Yes| H[AI lists available slots]
+    H --> I[Patient selects preferred slot]
+    I --> J[Confirm Booking + TTS Response]
+    J --> K[Send Reminder + Log Data]
+    G -->|No| L[Offer Alternate Doctor/Time]
+    L --> F
+    K --> M[Cycle Complete]
+```
+
+---
+
+Would you like me to extend these with **Agora module labels** (e.g., ASR, LLM, TTS, Network Routing, etc.) to match the architecture shown in your image?
+
