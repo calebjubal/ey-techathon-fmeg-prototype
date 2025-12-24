@@ -318,60 +318,15 @@ agentic-rfp-system/
 ## 💬 Maintainer
 
 **Team:**
-- Caleb Chandrasekar 
-- S. Tharundhatri
-- Sarvesh Chandran
+- [Caleb Chandrasekar](https://www.github.com/calebjubal) 
+- [Ayush Pratap Singh](https://www.github.com/apss2708)
+- [Rudra Pratap Singh](https://www.github.com/Rudra-AI-2127)
+- [Yashpal](https://www.github.com/Yashpal5)
+- [Rishika Pasricha](https://www.github.com/Rishika-pasricha)
 
 For questions or suggestions, please open an **Issue** or start a **Discussion**.
 
 ---
 
 ⭐ If you found this project useful, don’t forget to **star the repo**!
-
-Here are **compact left-to-right (LR) Mermaid diagrams** for your two conversational-AI flows:
-
----
-
-### Cycle 1 – Medicine Reminder Flow
-
-```mermaid
-flowchart LR
-    A[Retrieve User Profile & Schedule] --> B[Start Agora Voice Session]
-    B --> C[ASR → Text]
-    C --> D[LLM: Is it time for medication?]
-    D -- Yes --> E[Generate Reminder + Instructions]
-    D -- No --> F[“Not time yet, next at …”]
-    E --> G[TTS → Speak to User]
-    G --> H{User confirms taken?}
-    H -- Yes --> I[Log taken & Thank User]
-    H -- No --> J[Repeat guidance / Escalate]
-    I --> K[End Session]
-    J --> K
-    F --> K
-```
-
----
-
-### Cycle 2 – Patient Slot Booking Flow
-
-```mermaid
-flowchart LR
-    A[Authenticate Patient] --> B[Fetch History & Preferences]
-    B --> C[Start Agora Voice Session]
-    C --> D[ASR → Text]
-    D --> E[LLM: “I’d like to book an appointment”]
-    E --> F[Check Available Slots]
-    F -- Available --> G[Offer Slot Options]
-    G --> H[Patient Selects Slot]
-    H --> I[Confirm Booking + TTS Response]
-    I --> J[Schedule Reminder & Log Booking]
-    F -- None --> K[Offer Alternate Doctor/Time]
-    K --> F
-    J --> L[End Session]
-```
-
----
-
-If you like, I can **merge both flows into one diagram**, include more detail (e.g., incorporating your shown architecture with ASR / LLM / TTS boxes and the Agora modules) and provide a downloadable image or PDF. Would you like that?
-
 
