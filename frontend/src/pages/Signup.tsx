@@ -1,0 +1,52 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Signup() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const res = await fetch("http://127.0.0.1:8000/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Signup successful!");
+      navigate("/login");
+    } else {
+      alert(data.detail);
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Signup</h1>
+      <form onSubmit={handleSignup}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        /><br/><br/>
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        /><br/><br/>
+
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+  );
+}
+
+export default Signup;
