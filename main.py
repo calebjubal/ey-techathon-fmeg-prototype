@@ -11,6 +11,7 @@ from api.main_agent import router as main_router
 from api.sales_agent import router as sales_router
 from api.technical_agent import router as technical_router
 from api.pricing_agent import router as pricing_router
+from routes.user import router as user_router
 
 # class Fruit(BaseModel):
 #     fruit: str
@@ -48,3 +49,4 @@ app.include_router(main_router)
 app.include_router(sales_router)
 app.include_router(technical_router)
 app.include_router(pricing_router)
+app.include_router(user_router)
